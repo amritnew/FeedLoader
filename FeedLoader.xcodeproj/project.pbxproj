@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		65E768902806ABAB00F0AF24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E7688F2806ABAB00F0AF24 /* AppDelegate.swift */; };
 		65E768922806ABAB00F0AF24 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768912806ABAB00F0AF24 /* SceneDelegate.swift */; };
-		65E768942806ABAB00F0AF24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768932806ABAB00F0AF24 /* ViewController.swift */; };
+		65E768942806ABAB00F0AF24 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768932806ABAB00F0AF24 /* FeedViewController.swift */; };
 		65E768972806ABAB00F0AF24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65E768952806ABAB00F0AF24 /* Main.storyboard */; };
 		65E768992806ABB100F0AF24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65E768982806ABB100F0AF24 /* Assets.xcassets */; };
 		65E7689C2806ABB100F0AF24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65E7689A2806ABB100F0AF24 /* LaunchScreen.storyboard */; };
 		65E768A72806ABB100F0AF24 /* FeedLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768A62806ABB100F0AF24 /* FeedLoaderTests.swift */; };
 		65E768B12806ABB100F0AF24 /* FeedLoaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768B02806ABB100F0AF24 /* FeedLoaderUITests.swift */; };
 		65E768B32806ABB100F0AF24 /* FeedLoaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768B22806ABB100F0AF24 /* FeedLoaderUITestsLaunchTests.swift */; };
+		65E768C028082E3C00F0AF24 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768BF28082E3C00F0AF24 /* RemoteFeedLoader.swift */; };
+		65E768C228082F6900F0AF24 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768C128082F6900F0AF24 /* LocalFeedLoader.swift */; };
+		65E768C42808304400F0AF24 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768C32808304400F0AF24 /* Reachability.swift */; };
+		65E768C6280831B000F0AF24 /* RemoteWithLocalFallbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E768C5280831B000F0AF24 /* RemoteWithLocalFallbackService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +43,7 @@
 		65E7688C2806ABAB00F0AF24 /* FeedLoader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedLoader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E7688F2806ABAB00F0AF24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65E768912806ABAB00F0AF24 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		65E768932806ABAB00F0AF24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		65E768932806ABAB00F0AF24 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		65E768962806ABAB00F0AF24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		65E768982806ABB100F0AF24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65E7689B2806ABB100F0AF24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +53,10 @@
 		65E768AC2806ABB100F0AF24 /* FeedLoaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedLoaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E768B02806ABB100F0AF24 /* FeedLoaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderUITests.swift; sourceTree = "<group>"; };
 		65E768B22806ABB100F0AF24 /* FeedLoaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		65E768BF28082E3C00F0AF24 /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
+		65E768C128082F6900F0AF24 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
+		65E768C32808304400F0AF24 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		65E768C5280831B000F0AF24 /* RemoteWithLocalFallbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWithLocalFallbackService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +109,11 @@
 			children = (
 				65E7688F2806ABAB00F0AF24 /* AppDelegate.swift */,
 				65E768912806ABAB00F0AF24 /* SceneDelegate.swift */,
-				65E768932806ABAB00F0AF24 /* ViewController.swift */,
+				65E768932806ABAB00F0AF24 /* FeedViewController.swift */,
+				65E768BF28082E3C00F0AF24 /* RemoteFeedLoader.swift */,
+				65E768C128082F6900F0AF24 /* LocalFeedLoader.swift */,
+				65E768C32808304400F0AF24 /* Reachability.swift */,
+				65E768C5280831B000F0AF24 /* RemoteWithLocalFallbackService.swift */,
 				65E768952806ABAB00F0AF24 /* Main.storyboard */,
 				65E768982806ABB100F0AF24 /* Assets.xcassets */,
 				65E7689A2806ABB100F0AF24 /* LaunchScreen.storyboard */,
@@ -258,9 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65E768942806ABAB00F0AF24 /* ViewController.swift in Sources */,
+				65E768C028082E3C00F0AF24 /* RemoteFeedLoader.swift in Sources */,
+				65E768942806ABAB00F0AF24 /* FeedViewController.swift in Sources */,
+				65E768C42808304400F0AF24 /* Reachability.swift in Sources */,
 				65E768902806ABAB00F0AF24 /* AppDelegate.swift in Sources */,
 				65E768922806ABAB00F0AF24 /* SceneDelegate.swift in Sources */,
+				65E768C6280831B000F0AF24 /* RemoteWithLocalFallbackService.swift in Sources */,
+				65E768C228082F6900F0AF24 /* LocalFeedLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
