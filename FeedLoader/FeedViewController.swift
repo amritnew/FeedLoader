@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FeedLoader {
-    func loadFeed(completion: @escaping (([String]) -> Void))
-}
-
 class FeedViewController: UIViewController {
     var loader: FeedLoader!
     
@@ -21,6 +17,9 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func load() {
         loader.loadFeed { loadedItems in
             //update UI
         }

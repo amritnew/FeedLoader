@@ -8,8 +8,8 @@
 import Foundation
 
 class LocalFeedLoader: FeedLoader {
-    func loadFeed(completion: @escaping (([String]) -> Void)) {
+    func loadFeed(completion: @escaping ((LoadFeedResult) -> Void)) {
         //get feeds from cache
-        completion(["A", "B"])
+        //completion(["A", "B"])
     }
 }
