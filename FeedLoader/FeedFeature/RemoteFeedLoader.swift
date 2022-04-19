@@ -24,7 +24,7 @@ class RemoteFeedLoader {
     func loadFeed(completion: @escaping ((Error) -> Void) = {_ in}) {
         // call url session to fetch feeds
         //completion([LoadFeedResult()])
-        client.get(from: url) { Error in
+        client.get(from: url) { error in
             completion(.connectivity)
         }
     }
