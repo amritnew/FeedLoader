@@ -7,9 +7,13 @@
 
 import Foundation
 
+enum HTTPClientResult {
+    case success(HTTPURLResponse)
+    case failure(Error)
+}
 
 protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (Error?, HTTPURLResponse?) -> Void)
+    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
 
 
