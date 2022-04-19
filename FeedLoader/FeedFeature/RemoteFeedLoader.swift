@@ -8,19 +8,25 @@
 import Foundation
 
 
-class RemoteFeedLoader: FeedLoader {
-    let client: HTTPClient
+class RemoteFeedLoader {
     let url: URL
+    let client: HTTPClient
+    
+    enum Error: Swift.Error {
+        case connectivity
+    }
     
     init(url: URL, client: HTTPClient) {
         self.client = client
         self.url = url
     }
     
-    func loadFeed(completion: @escaping ((LoadFeedResult) -> Void)) {
+    func loadFeed(completion: @escaping ((Error) -> Void) = {_ in}) {
         // call url session to fetch feeds
         //completion([LoadFeedResult()])
-        client.get(from: url)
+        client.get(from: url) { Error in
+            completion(.connectivity)
+        }
     }
 
 }
