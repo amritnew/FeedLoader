@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol HTTPClient {
-    func get(from url: URL?)
+    func get(from url: URL)
 }
 
 
