@@ -92,11 +92,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6508D4012810163A0060A0D5 /* FeedAPI */ = {
+			isa = PBXGroup;
+			children = (
+				65E768BF28082E3C00F0AF24 /* RemoteFeedLoader.swift */,
+				65756239280D7D21006C49FA /* Http */,
+			);
+			path = FeedAPI;
+			sourceTree = "<group>";
+		};
 		65756235280948C9006C49FA /* FeedFeature */ = {
 			isa = PBXGroup;
 			children = (
 				65E768C128082F6900F0AF24 /* LocalFeedLoader.swift */,
-				65E768BF28082E3C00F0AF24 /* RemoteFeedLoader.swift */,
 				65E768C72808514200F0AF24 /* FeedItem.swift */,
 				657562322809489D006C49FA /* FeedLoader.swift */,
 			);
@@ -134,7 +142,7 @@
 		65E7688E2806ABAB00F0AF24 /* FeedLoader */ = {
 			isa = PBXGroup;
 			children = (
-				65756239280D7D21006C49FA /* Http */,
+				6508D4012810163A0060A0D5 /* FeedAPI */,
 				65E7688F2806ABAB00F0AF24 /* AppDelegate.swift */,
 				65E768912806ABAB00F0AF24 /* SceneDelegate.swift */,
 				65E768932806ABAB00F0AF24 /* FeedViewController.swift */,
