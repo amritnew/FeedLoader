@@ -69,7 +69,34 @@ class RemoteFeedLoaderTests: XCTestCase {
         expect(sut, toCompleteWithResult: .success([])) {
             let emptyListJson = Data("{\"items\": []}".utf8)
             client.complete(with: 200, data: emptyListJson)
-        } 
+        }
+    }
+    
+    func test_load_deliversItemOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        
+        let item1 = FeedItem(id: UUID(), description: nil, location: nil, imageUrl: URL(string: "http://a-given-url")!)
+        let itemJSON1 = [
+            "id": item1.id.uuidString,
+            "image": item1.imageUrl.absoluteString
+        ]
+        
+        let item2 = FeedItem(id: UUID(), description: "a description", location: "a location", imageUrl: URL(string: "http://another-given-url")!)
+        let itemJSON2 = [
+            "id": item2.id.uuidString,
+            "description": item2.description,
+            "location": item2.location,
+            "image": item2.imageUrl.absoluteString
+        ]
+        
+        let itemJSON = [
+            "items" : [itemJSON1, itemJSON2]
+            ]
+        
+        expect(sut, toCompleteWithResult: .success([item1, item2])) {
+            let data = try! JSONSerialization.data(withJSONObject: itemJSON)
+            client.complete (with: 200, data: data)
+        }
     }
     
     //MARK: Helpers
