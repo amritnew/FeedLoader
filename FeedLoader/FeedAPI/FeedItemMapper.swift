@@ -12,6 +12,10 @@ final class FeedItemsMapper {
     
     private struct Root: Decodable {
         let items: [Item]
+        
+        var feeds: [FeedItem] {
+            return items.map { $0.item }
+        }
     }
 
     private struct Item: Equatable, Decodable {
@@ -30,10 +34,11 @@ final class FeedItemsMapper {
         return 200
     }
     
-    static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [FeedItem] {
-        guard response.statusCode == OK_200 else {
-            throw RemoteFeedLoader.Error.invalidData
+    static func map(_ data: Data, _ response: HTTPURLResponse)  -> RemoteFeedLoader.Result {
+        guard response.statusCode == OK_200,
+                let root = try? JSONDecoder().decode(Root.self, from: data) else {
+            return .failure(.invalidData)
         }
-        return try JSONDecoder().decode(Root.self, from: data).items.map { $0.item }
+        return .success(root.feeds)
     }
 }
