@@ -122,7 +122,6 @@ class RemoteFeedLoaderTests: XCTestCase {
     }
     
     private func expect(_ sut: RemoteFeedLoader, toCompleteWithResult expectedResult: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedErrors = [RemoteFeedLoader.Result]()
         
         let expectation = expectation(description: "Wair for load completion")
         sut.loadFeed { recievedResult in
