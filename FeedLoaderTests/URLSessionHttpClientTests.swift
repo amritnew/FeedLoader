@@ -9,31 +9,6 @@ import XCTest
 @testable import FeedLoader
 
 
-class URLSessionHttpClient {
-    private let session: URLSession
-    
-    struct InvalidRepresentation: Error {}
-    
-    init(urlSession: URLSession = .shared) {
-        self.session = urlSession
-    }
-    
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
-        session.dataTask(with: url) { data, response, error in
-            if let err = error {
-                completion(.failure(err))
-            }
-            else if let data = data, let response = response as? HTTPURLResponse {
-                completion(.success(data, response ))
-            }
-            else {
-                completion(.failure(InvalidRepresentation()))
-            }
-        }.resume()
-    }
-}
-
-
 class URLSessionHttpClientTests: XCTestCase {
     
     override func setUp() {
@@ -127,7 +102,7 @@ class URLSessionHttpClientTests: XCTestCase {
         return HTTPURLResponse(url: anyUrl(), mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
     }
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHttpClient {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
         let sut = URLSessionHttpClient()
         trackMemoryLeak(instance: sut)
         return sut
