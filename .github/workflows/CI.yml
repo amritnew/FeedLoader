@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Select Xcode
-        run: sudo xcode-select -switch /Aplications/Xcode.app
+        run: sudo xcode-select -switch /Applications/Xcode.app
 
       # Runs a set of commands using the runners shell
       - name: Build and test
