@@ -188,16 +188,19 @@ class URLSessionHttpClientTests: XCTestCase {
         }
         
         override func startLoading() {
-            guard let stub = URLProtocolStub.stubs else {
-                return
+            
+            if let requestObserver = URLProtocolStub.requestObserver {
+                client?.urlProtocolDidFinishLoading(self)
+                return requestObserver(request)
             }
-            if let data = stub.data {
+            
+            if let data = URLProtocolStub.stubs?.data {
                 client?.urlProtocol(self, didLoad: data)
             }
-            if let response = stub.response {
+            if let response = URLProtocolStub.stubs?.response {
                 client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             }
-            if let error = stub.error {
+            if let error = URLProtocolStub.stubs?.error {
                 client?.urlProtocol(self, didFailWithError: error)
             }
             
