@@ -18,16 +18,16 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     func test_save_requestCacheDeletion() {
         let (store, sut) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
-        sut.save(items) {_ in }
+        let item = uniqueItems()
+        sut.save(item.models) {_ in }
         
         XCTAssertEqual(store.recievedMessages, [.deleteCache])
     }
     
     func test_save_doesNotRequestInsertionOnDeletionCacheError() {
         let (store, sut) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
-        sut.save(items) {_ in }
+        let item = uniqueItems()
+        sut.save(item.models) {_ in }
         let deletionError = anyError()
         store.completeDeletionError(deletionError)
         
@@ -37,12 +37,11 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestInsertionWithTimestampOnDeletionSucessfull() {
         let timestamp = Date()
         let (store, sut) = makeSUT(currentDate: { timestamp })
-        let items = [uniqueItem(), uniqueItem()]
-        let localItems = items.map { LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageUrl: $0.imageUrl) }
-        sut.save(items) {_ in }
+        let item = uniqueItems()
+        sut.save(item.models) {_ in }
         store.completeDeletionSucessFully()
         
-        XCTAssertEqual(store.recievedMessages, [.deleteCache, .insertCache(localItems, timestamp)])
+        XCTAssertEqual(store.recievedMessages, [.deleteCache, .insertCache(item.localModels, timestamp)])
     }
     
     func test_save_failsOnDeletionCacheError() {
@@ -129,6 +128,12 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     private func uniqueItem() -> FeedItem {
         return FeedItem(id: UUID(), description: "any", location: "any", imageUrl: anyUrl())
+    }
+    
+    private func uniqueItems() -> (models: [FeedItem], localModels: [LocalFeedItem]) {
+        let items = [uniqueItem(), uniqueItem()]
+        let localItems = items.map { LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageUrl: $0.imageUrl) }
+        return(items, localItems)
     }
     
     private func anyUrl() -> URL {
