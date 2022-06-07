@@ -9,27 +9,6 @@ import Foundation
 import XCTest
 @testable import FeedLoader
 
-class LocalFeedLoader {
-    private let store: FeedStore
-    private let currentDate: () -> Date
-    
-    init(store: FeedStore, currentDate: @escaping () -> Date) {
-        self.store = store
-        self.currentDate = currentDate
-    }
-    
-    func save(_ items: [FeedItem], completion: @escaping (Error?) -> Void) {
-        store.deleteCache { [unowned self]error in
-            if (error == nil) {
-                self.store.insertCache(with: items, timestamp: self.currentDate(), completion: completion)
-            }
-            else {
-                completion(error)
-            }
-        }
-    }
-}
-
 class CacheFeedUseCaseTests: XCTestCase {
     
     func test_init_doesnotHaveAnyMessageUponCreation() {
@@ -91,6 +70,20 @@ class CacheFeedUseCaseTests: XCTestCase {
             store.completeDeletionSucessFully()
             store.completeInsertionSucessFully()
         }
+    }
+    
+    func test_save_doesNotDeliverDeletionErrorAfterSUTHasBeenDeallocated() {
+        let store = FeedStoreSpy()
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: store) { Date() }
+        
+        var receivedResults = [Error?]()
+        sut?.save([uniqueItem()]) { receivedResults.append($0) }
+        
+        sut = nil
+        let deletionError = anyError()
+        store.completeDeletionError(deletionError)
+                
+        XCTAssertTrue(receivedResults.isEmpty)
     }
     
     //MARK: - Helpers

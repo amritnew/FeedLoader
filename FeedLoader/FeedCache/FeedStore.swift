@@ -13,3 +13,4 @@ protocol FeedStore {
     func deleteCache(completion: @escaping Completion)
     func insertCache(with items: [FeedItem], timestamp: Date, completion: @escaping Completion)
 }
+

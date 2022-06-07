@@ -8,8 +8,24 @@
 import Foundation
 
 class LocalFeedLoader {
-//    func loadFeed(completion: @escaping ((LoadFeedResult<Error>) -> Void)) {
-//        //get feeds from cache
-//        //completion(["A", "B"])
-//    }
+
+    private let store: FeedStore
+    private let currentDate: () -> Date
+    
+    init(store: FeedStore, currentDate: @escaping () -> Date) {
+        self.store = store
+        self.currentDate = currentDate
+    }
+    
+    func save(_ items: [FeedItem], completion: @escaping (Error?) -> Void) {
+        store.deleteCache { [weak self] error in
+            guard let self = self else { return }
+            if (error == nil) {
+                self.store.insertCache(with: items, timestamp: self.currentDate(), completion: completion)
+            }
+            else {
+                completion(error)
+            }
+        }
+    }
 }
