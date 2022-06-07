@@ -30,13 +30,6 @@ class LocalFeedLoader {
     }
 }
 
-protocol FeedStore {
-    typealias Completion = (Error?) -> Void
-    
-    func deleteCache(completion: @escaping Completion)
-    func insertCache(with items: [FeedItem], timestamp: Date, completion: @escaping Completion)
-}
-
 class CacheFeedUseCaseTests: XCTestCase {
     
     func test_init_doesnotHaveAnyMessageUponCreation() {
