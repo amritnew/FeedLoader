@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		650026D6284F2A27001C3986 /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650026D5284F2A27001C3986 /* CacheFeedUseCaseTests.swift */; };
 		650240E2281BCB8600F7CD28 /* URLSessionHttpClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650240E1281BCB8600F7CD28 /* URLSessionHttpClientTests.swift */; };
 		650240E5281FF64D00F7CD28 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650240E4281FF64D00F7CD28 /* XCTestCase+MemoryLeakTracking.swift */; };
 		653E839A28253DDE00FA6B02 /* URLSessionHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653E839928253DDE00FA6B02 /* URLSessionHttpClient.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		650026D5284F2A27001C3986 /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		650240E1281BCB8600F7CD28 /* URLSessionHttpClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpClientTests.swift; sourceTree = "<group>"; };
 		650240E4281FF64D00F7CD28 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		653E839928253DDE00FA6B02 /* URLSessionHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpClient.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		650026D4284F29B9001C3986 /* Feed cache */ = {
 			isa = PBXGroup;
 			children = (
+				650026D5284F2A27001C3986 /* CacheFeedUseCaseTests.swift */,
 			);
 			path = "Feed cache";
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			files = (
 				650240E2281BCB8600F7CD28 /* URLSessionHttpClientTests.swift in Sources */,
 				650240E5281FF64D00F7CD28 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				650026D6284F2A27001C3986 /* CacheFeedUseCaseTests.swift in Sources */,
 				65756237280D7676006C49FA /* RemoteFeedLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
