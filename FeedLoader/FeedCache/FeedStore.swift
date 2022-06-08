@@ -10,7 +10,7 @@ import Foundation
 protocol FeedStore {
     typealias Completion = (Error?) -> Void
     
-    func retrieve()
+    func retrieve(completion: @escaping Completion)
     func deleteCache(completion: @escaping Completion)
     func insertCache(with items: [LocalFeedImage], timestamp: Date, completion: @escaping Completion)
 }
