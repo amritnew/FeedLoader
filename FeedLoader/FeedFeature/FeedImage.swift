@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct FeedItem: Equatable {
+struct FeedImage: Equatable {
     let id: UUID
     let description: String?
     let location: String?
-    let imageUrl: URL
+    let url: URL
     
-    init(id: UUID, description: String?, location: String?, imageUrl: URL) {
+    init(id: UUID, description: String?, location: String?, url: URL) {
         self.id = id
         self.description = description
         self.location = location
-        self.imageUrl = imageUrl
+        self.url = url
     }
 }
 

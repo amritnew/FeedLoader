@@ -8,7 +8,7 @@
 import Foundation
 
 enum LoadFeedResult<Error: Swift.Error> {
-    case success([FeedItem])
+    case success([FeedImage])
     case failure(Error)
 }
 
