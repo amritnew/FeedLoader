@@ -12,6 +12,7 @@ class FeedStoreSpy: FeedStore {
     typealias Completion = (Error?) -> Void
     
     enum RecievedMessage: Equatable {
+        case retrieve
         case deleteCache
         case insertCache([LocalFeedImage], Date)
     }
@@ -19,6 +20,10 @@ class FeedStoreSpy: FeedStore {
     var recievedMessages = [RecievedMessage]()
     private var deletionCompletions = [Completion]()
     private var insertionCompletions = [Completion]()
+    
+    func retrieve() {
+        recievedMessages.append(.retreive)
+    }
     
     func deleteCache(completion: @escaping Completion) {
         deletionCompletions.append(completion)
