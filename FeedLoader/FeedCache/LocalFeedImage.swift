@@ -1,5 +1,5 @@
 //
-//  LocalFeedItem.swift
+//  LocalFeedImage.swift
 //  FeedLoader
 //
 //  Created by AmritPandey on 07/06/22.

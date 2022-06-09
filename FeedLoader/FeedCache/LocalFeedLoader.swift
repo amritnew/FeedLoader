@@ -30,7 +30,6 @@ final class LocalFeedLoader {
                 completion(.success(feeds.toModels()))
                 
             case let .failure(error):
-                self.store.deleteCache { _ in }
                 completion(.failure(error))
                 
             case  .found:
@@ -40,6 +39,11 @@ final class LocalFeedLoader {
                 completion(.success([]))
             }
         }
+    }
+    
+    func validate() {
+        store.retrieve{ _ in }
+        store.deleteCache {_ in }
     }
     
     func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
