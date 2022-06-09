@@ -32,7 +32,10 @@ final class LocalFeedLoader {
                 self.store.deleteCache { _ in }
                 completion(.failure(error))
                 
-            case  .found, .empty:
+            case  .found:
+                self.store.deleteCache{ _ in }
+                completion(.success([]))
+            case .empty:
                 completion(.success([]))
             }
         }
