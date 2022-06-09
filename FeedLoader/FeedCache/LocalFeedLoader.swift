@@ -23,7 +23,8 @@ final class LocalFeedLoader {
     }
     
     func load(completion: @escaping (LoadResult<Error>) -> Void) {
-        store.retrieve { [unowned self] result in
+        store.retrieve { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .found(feeds, timestamp) where self.validate(timestamp):
                 completion(.success(feeds.toModels()))
