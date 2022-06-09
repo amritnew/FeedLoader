@@ -9,6 +9,66 @@ import Foundation
 import XCTest
 @testable import FeedLoader
 
+class LocalFeedLoader {
+    private let store: FeedStore
+    private let currentDate: () -> Date
+    
+    init(store: FeedStore, currentDate: @escaping () -> Date) {
+        self.store = store
+        self.currentDate = currentDate
+    }
+    
+    func save(_ items: [FeedItem], completion: @escaping (Error?) -> Void) {
+        store.deleteCache { [unowned self]error in
+            if (error == nil) {
+                self.store.insertCache(with: items, timestamp: self.currentDate(), completion: completion)
+            }
+            else {
+                completion(error)
+            }
+        }
+    }
+}
+
+class FeedStore {
+    typealias Completion = (Error?) -> Void
+    
+    enum RecievedMessage: Equatable {
+        case deleteCache
+        case insertCache([FeedItem], Date)
+    }
+    
+    var recievedMessages = [RecievedMessage]()
+    private var deletionCompletions = [Completion]()
+    private var insertionCompletions = [Completion]()
+    
+    func deleteCache(completion: @escaping Completion) {
+        deletionCompletions.append(completion)
+        recievedMessages.append(.deleteCache)
+    }
+    
+    func insertCache(with items: [FeedItem], timestamp: Date, completion: @escaping Completion) {
+        insertionCompletions.append(completion)
+        recievedMessages.append(.insertCache(items, timestamp))
+    }
+    
+    func completeInsertionError(_ error: Error, at index: Int = 0) {
+        insertionCompletions[index](error)
+    }
+    
+    func completeInsertionSucessFully(at index: Int = 0) {
+        insertionCompletions[index](nil)
+    }
+    
+    func completeDeletionError(_ error: Error, at index: Int = 0) {
+        deletionCompletions[index](error)
+    }
+    
+    func completeDeletionSucessFully(at index: Int = 0) {
+        deletionCompletions[index](nil)
+    }
+}
+
 class CacheFeedUseCaseTests: XCTestCase {
     
     func test_init_doesnotHaveAnyMessageUponCreation() {
