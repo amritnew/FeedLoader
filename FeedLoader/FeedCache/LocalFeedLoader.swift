@@ -42,8 +42,15 @@ final class LocalFeedLoader {
     }
     
     func validate() {
-        store.retrieve{ _ in }
-        store.deleteCache {_ in }
+        store.retrieve{ [unowned self] result in
+            switch result {
+            case .failure:
+                self.store.deleteCache {_ in }
+            default:
+                break
+            }
+        }
+        
     }
     
     func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
