@@ -127,7 +127,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let store = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
         
-        var receivedResult = [LocalFeedLoader.LoadResult<Error>]()
+        var receivedResult = [LocalFeedLoader.LoadResult]()
         sut?.load { receivedResult.append($0) }
         sut = nil
         store.completeRetrievalWithEmptyCache()
@@ -145,7 +145,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         return(store, sut)
     }
     
-    private func expect(_ sut: LocalFeedLoader, toCompleteWithResult expectedResult: LocalFeedLoader.LoadResult<Error>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: LocalFeedLoader, toCompleteWithResult expectedResult: LocalFeedLoader.LoadResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         
         let expectation = expectation(description: "Wair for load completion")
         sut.load { recievedResult in

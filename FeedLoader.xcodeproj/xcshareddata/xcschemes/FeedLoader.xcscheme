@@ -40,8 +40,7 @@
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "65E768A12806ABB100F0AF24"
@@ -57,16 +56,6 @@
                BlueprintIdentifier = "65E768AB2806ABB100F0AF24"
                BuildableName = "FeedLoaderUITests.xctest"
                BlueprintName = "FeedLoaderUITests"
-               ReferencedContainer = "container:FeedLoader.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6579594F28322EC80077B400"
-               BuildableName = "FeedLoaderAPIEndToEndTests.xctest"
-               BlueprintName = "FeedLoaderAPIEndToEndTests"
                ReferencedContainer = "container:FeedLoader.xcodeproj">
             </BuildableReference>
          </TestableReference>

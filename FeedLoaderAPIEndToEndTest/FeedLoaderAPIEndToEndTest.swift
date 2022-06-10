@@ -34,7 +34,7 @@ class FeedLoaderAPIEndToEndTests: XCTestCase {
         trackMemoryLeak(instance: loader, file: file, line: line)
         let exp = expectation(description: "Wait for downlaoding data")
         var receivedResult: RemoteFeedLoader.Result?
-        loader.loadFeed { result in
+        loader.load { result in
             receivedResult = result
             exp.fulfill()
         }
