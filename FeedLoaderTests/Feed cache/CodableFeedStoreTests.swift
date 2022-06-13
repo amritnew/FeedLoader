@@ -38,7 +38,11 @@ class CodableFeedStore {
         }
     }
     
-    private let storeUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
+    private let storeUrl: URL
+    
+    init(_ storeURL: URL) {
+        self.storeUrl = storeURL
+    }
     
     func retrieve(completion: @escaping FeedStore.RetrievalCompletion) {
         let decoder = JSONDecoder()
@@ -67,14 +71,12 @@ class CodableFeedStore {
 
 class CodableFeedStoreTests: XCTestCase {
     
-    override func setUp() async throws {
-        let storeUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
-        try? FileManager.default.removeItem(at: storeUrl)
+    override func setUp() {
+        try? FileManager.default.removeItem(at: storeURL())
     }
     
-    override class func tearDown() {
-        let storeUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
-        try? FileManager.default.removeItem(at: storeUrl)
+    override func tearDown() {
+        try? FileManager.default.removeItem(at: storeURL())
     }
     
     
@@ -142,9 +144,13 @@ class CodableFeedStoreTests: XCTestCase {
     //MARK: Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableFeedStore{
-        let codable = CodableFeedStore()
+        let codable = CodableFeedStore(storeURL())
         trackMemoryLeak(instance: codable, file: file, line: line)
         return codable
+    }
+    
+    private func storeURL() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
     }
     
 }
