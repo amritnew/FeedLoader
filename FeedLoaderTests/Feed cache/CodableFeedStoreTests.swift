@@ -50,8 +50,12 @@ class CodableFeedStore {
             return completion(.empty)
         }
         
-        let cache = try! decoder.decode(Cache.self, from: data)
-        completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
+        do {
+            let cache = try decoder.decode(Cache.self, from: data)
+            completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     func deleteCache(completion: @escaping FeedStore.Completion) {
@@ -93,7 +97,7 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut: sut, toRetrieve: .empty)
     }
     
-    func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValue() {
+    func test_retrieve_deliversFoundValueOnNonEmptyCache() {
         let sut = makeSUT()
         let feed = uniqueImageFeed().localModels
         let timestamp = Date()
@@ -109,6 +113,14 @@ class CodableFeedStoreTests: XCTestCase {
         
         insert((feed, timestamp), to: sut)
         expect(sut: sut, toRetrieveTwice: .found(feed: feed, timestamp: timestamp))
+    }
+    
+    func test_retrieve_deliversFailureOnRetrievalError() {
+        let sut = makeSUT()
+        
+        try! "invalid data".write(to: testSpecificStoreURL(), atomically: false, encoding: .utf8)
+        
+        expect(sut: sut, toRetrieve: .failure(anyError()))
     }
      
     //MARK: Helpers
@@ -137,7 +149,7 @@ class CodableFeedStoreTests: XCTestCase {
         let exp = expectation(description: "Wait for cache retieval")
         sut.retrieve { retrivedResult in
             switch (retrivedResult, expectedResult) {
-            case (.empty, .empty):
+            case (.empty, .empty), (.failure, .failure):
                 break
             case let (.found(retrived), .found(expected)):
                 XCTAssertEqual(retrived.feed, expected.feed)
