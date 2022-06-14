@@ -98,12 +98,7 @@ class CodableFeedStoreTests: XCTestCase {
         let feed = uniqueImageFeed().localModels
         let timestamp = Date()
         
-        let exp = expectation(description: "Wait for cache retieval")
-        sut.insertCache(with: feed, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
+        insert((feed, timestamp), to: sut)
         expect(sut: sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
     }
     
@@ -112,13 +107,7 @@ class CodableFeedStoreTests: XCTestCase {
         let feed = uniqueImageFeed().localModels
         let timestamp = Date()
         
-        let exp = expectation(description: "Wait for cache retieval")
-        sut.insertCache(with: feed, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        
+        insert((feed, timestamp), to: sut)
         expect(sut: sut, toRetrieveTwice: .found(feed: feed, timestamp: timestamp))
     }
      
@@ -128,6 +117,15 @@ class CodableFeedStoreTests: XCTestCase {
         let codable = CodableFeedStore(testSpecificStoreURL())
         trackMemoryLeak(instance: codable, file: file, line: line)
         return codable
+    }
+    
+    private func insert(_ cache: (feed: [LocalFeedImage], timestamp: Date), to sut: CodableFeedStore) {
+        let exp = expectation(description: "Wait for cache insertion")
+        sut.insertCache(with: cache.feed, timestamp: cache.timestamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func expect(sut: CodableFeedStore, toRetrieveTwice expectedResult: RetrievalCachedFeedResult, file: StaticString = #file, line: UInt = #line) {
