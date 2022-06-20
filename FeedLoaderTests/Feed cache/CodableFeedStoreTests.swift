@@ -137,14 +137,14 @@ class CodableFeedStoreTests: XCTestCase {
         }
         
         let op3 = expectation(description: "Wait for cache retrieval")
-        sut.deleteCache { _ in
+        sut.retrieve { _ in
             completedOperations.append(op3)
             op3.fulfill()
         }
         
         wait(for: [op1, op2, op3], timeout: 1.0)
         
-        XCTAssertEqual(completedOperations, [op1, op2, op3], "Expected to finish in order op1, op2, op3 instead finish in \(completedOperations) order")
+        XCTAssertEqual(completedOperations, [op1, op2, op3], "Expected side effects to finish serially but operation finifshed in wrong order")
     }
      
     //MARK: Helpers
