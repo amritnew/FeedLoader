@@ -11,7 +11,7 @@ import XCTest
 typealias FailableFeedStore = FailableRetrieveFeedStoreSpecs & FailableInsertFeedStoreSpecs & FailableDeleteFeedStoreSpecs
 
 class CodableFeedStoreTests: XCTestCase, FailableFeedStore {
-    
+
     override func setUp() {
         setUpEmptyStoreState()
     }
@@ -24,32 +24,25 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStore {
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
         
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatRetrieveDeliversEmptyOnEmptyCache(on: sut)
     }
     
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
         
-        expect(sut: sut, toRetrieve: .empty)
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatRetrieveHasNoSideEffectsOnEmptyCache(on: sut)
     }
     
     func test_retrieve_deliversFoundValueOnNonEmptyCache() {
         let sut = makeSUT()
-        let feed = uniqueImageFeed().localModels
-        let timestamp = Date()
         
-        insert((feed, timestamp), to: sut)
-        expect(sut: sut, toRetrieve: .found(feed: feed, timestamp: timestamp))
+        assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
     }
     
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
         let sut = makeSUT()
-        let feed = uniqueImageFeed().localModels
-        let timestamp = Date()
         
-        insert((feed, timestamp), to: sut)
-        expect(sut: sut, toRetrieveTwice: .found(feed: feed, timestamp: timestamp))
+        assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(on: sut)
     }
     
     func test_retrieve_deliversFailureOnRetrievalError() {
@@ -58,145 +51,92 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStore {
         
         try! "invalid data".write(to: storeUrl, atomically: false, encoding: .utf8)
         
-        expect(sut: sut, toRetrieve: .failure(anyError()))
+        assertThatRetrieveDeliversFailureOnRetrievalError(on: sut)
     }
     
-    func test_insert_deliversNoErrorOnEmptyCache() {
-        let sut = makeSUT()
-
-        let insertionError = insert((uniqueImageFeed().localModels, Date()), to: sut)
-        
-        XCTAssertNil(insertionError, "Expected to insert cache successfully")
-    }
-
-    func test_insert_deliversNoErrorOnNonEmptyCache() {
-        let sut = makeSUT()
-        insert((uniqueImageFeed().localModels, Date()), to: sut)
-
-        let insertionError = insert((uniqueImageFeed().localModels, Date()), to: sut)
-        
-        XCTAssertNil(insertionError, "Expected to override cache successfully")
-    }
-
-
     func test_retrieve_hasNoSideEffectOnRetrievalError() {
         let storeUrl = testSpecificStoreURL()
         let sut = makeSUT(storeUrl: storeUrl)
         
         try! "invalid data".write(to: storeUrl, atomically: false, encoding: .utf8)
         
-        expect(sut: sut, toRetrieveTwice: .failure(anyError()))
+        assertThatRetrieveHasNoSideEffectsOnFailure(on: sut)
+    }
+    
+    func test_insert_deliversNoErrorOnEmptyCache() {
+        let sut = makeSUT()
+        
+        assertThatInsertDeliversNoErrorOnEmptyCache(on: sut)
+    }
+
+    func test_insert_deliversNoErrorOnNonEmptyCache() {
+        let sut = makeSUT()
+        
+        assertThatInsertDeliversNoErrorOnNonEmptyCache(on: sut)
     }
     
     func test_insert_overridesPreviousInsertedValues() {
         let sut = makeSUT()
-        let feed = uniqueImageFeed().localModels
         
-        let insertionError = insert((feed, Date()), to: sut)
-        XCTAssertNil(insertionError, "Epected to insert succesfully")
-        
-        let latestFeed = uniqueImageFeed().localModels
-        let latestTimestamp = Date()
-        let latestInsertionError = insert((latestFeed, latestTimestamp), to: sut)
-        XCTAssertNil(latestInsertionError, "Epected to insert succesfully")
-        
-        expect(sut: sut, toRetrieveTwice: .found(feed: latestFeed, timestamp: latestTimestamp))
+        assertThatInsertOverridesPreviouslyInsertedCacheValues(on: sut)
     }
     
     func test_insert_deliversErrorOnInsertionError() {
         let storeUrl = URL(string: "invalidUrl://any-store-url")!
         let sut = makeSUT(storeUrl: storeUrl)
         
-        let insertionError = insert((uniqueImageFeed().localModels, Date()), to: sut)
-        XCTAssertNotNil(insertionError, "Epected insertion error")
+        assertThatInsertDeliversErrorOnInsertionError(on: sut)
     }
     
     func test_insert_hasNoSideEffectsOnInsertionError() {
         let storeUrl = URL(string: "invalidUrl://any-store-url")!
         let sut = makeSUT(storeUrl: storeUrl)
         
-        insert((uniqueImageFeed().localModels, Date()), to: sut)
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatInsertHasNoSideEffectsOnInsertionError(on: sut)
     }
     
     func test_delete_deliversNoErrorOnEmptyCache() {
         let sut = makeSUT()
         
-        let deletionError = delete(sut: sut)
-        
-        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
+        assertThatDeleteDeliversNoErrorOnEmptyCache(on: sut)
     }
 
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
         
-        delete(sut: sut)
-        
-        expect(sut:sut, toRetrieve: .empty)
+        assertThatDeleteHasNoSideEffectsOnEmptyCache(on: sut)
     }
     
-    func test_delete_hasNoSideEffectOnEmptyCache() {
+    func test_delete_deliversNoErrorOnNonEmptyCache() {
         let sut = makeSUT()
         
-        let deletionError = delete(sut: sut)
-        XCTAssertNil(deletionError, "Epected empty cache deletion to succeed")
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatDeleteDeliversNoErrorOnNonEmptyCache(on: sut)
     }
     
     func test_delete_emptiesPreviouslyInsertedCache() {
         let sut = makeSUT()
-        let feed = uniqueImageFeed().localModels
         
-        let insertionError = insert((feed, Date()), to: sut)
-        XCTAssertNil(insertionError, "Expected to insert succesfully")
-        
-        let deletionError = delete(sut: sut)
-        XCTAssertNil(deletionError, "Expected non empty cache deletion to succeed")
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatDeleteEmptiesPreviouslyInsertedCache(on: sut)
     }
     
     func test_delete_deliverErrorOnDeletionError() {
         let noDeletePermissionURL = noDeletePermissionURL()
         let sut = makeSUT(storeUrl: noDeletePermissionURL)
 
-        let deletionError = delete(sut: sut)
-        XCTAssertNotNil(deletionError, "Expected deletion error")
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatDeleteDeliversErrorOnDeletionError(on: sut)
     }
     
     func test_delete_hasNoEffectOnDeletionError() {
         let noDeletePermissionURL = noDeletePermissionURL()
         let sut = makeSUT(storeUrl: noDeletePermissionURL)
 
-        delete(sut: sut)
-        expect(sut: sut, toRetrieve: .empty)
+        assertThatDeleteHasNoSideEffectsOnDeletionError(on: sut)
     }
     
     func test_storeSodeEffects_runSerially() {
         let sut = makeSUT()
         
-        var completedOperations = [XCTestExpectation]()
-        let op1 = expectation(description: "Wait for cache insertion")
-        sut.insertCache(with: uniqueImageFeed().localModels, timestamp: Date()) { _ in
-            completedOperations.append(op1)
-            op1.fulfill()
-        }
-        
-        let op2 = expectation(description: "Wait for cache deletion")
-        sut.deleteCache { _ in
-            completedOperations.append(op2)
-            op2.fulfill()
-        }
-        
-        let op3 = expectation(description: "Wait for cache retrieval")
-        sut.retrieve { _ in
-            completedOperations.append(op3)
-            op3.fulfill()
-        }
-        
-        wait(for: [op1, op2, op3], timeout: 1.0)
-        
-        XCTAssertEqual(completedOperations, [op1, op2, op3], "Expected side effects to finish serially but operation finifshed in wrong order")
+        assertThatSideEffectsRunSerially(on: sut)
     }
      
     //MARK: Helpers
