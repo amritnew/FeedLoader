@@ -38,7 +38,16 @@ final class CoreDataFeedStore: FeedStore {
     }
     
     func deleteCache(completion: @escaping Completion) {
-        completion(nil)
+        let context = self.context
+        context.perform {
+            do {
+                try ManagedCache.fetchRequest(context: context).map { context.delete($0) }
+                completion(nil)
+            }
+            catch {
+                completion(error)
+            }
+        }
     }
     
     func insertCache(with items: [LocalFeedImage], timestamp: Date, completion: @escaping Completion) {
