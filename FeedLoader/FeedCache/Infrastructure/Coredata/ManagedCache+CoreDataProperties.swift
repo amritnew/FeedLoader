@@ -16,8 +16,8 @@ extension ManagedCache {
         return NSFetchRequest<ManagedCache>(entityName: "ManagedCache")
     }
 
-    @NSManaged public var timestamp: Date?
-    @NSManaged public var feed: NSOrderedSet?
+    @NSManaged public var timestamp: Date
+    @NSManaged public var feed: NSOrderedSet
 
 }
 

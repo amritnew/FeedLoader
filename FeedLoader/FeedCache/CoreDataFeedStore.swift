@@ -19,7 +19,27 @@ final class CoreDataFeedStore: FeedStore {
     }
     
     func retrieve(completion: @escaping RetrievalCompletion) {
-        completion(.empty)
+        let context = self.context
+        context.perform {
+            do {
+                let request = ManagedCache.fetchRequest()
+                request.returnsObjectsAsFaults = false
+                if let cache = try context.fetch(request).first {
+                    completion(.found(
+                        feed: cache.feed
+                            .compactMap({ $0 as? ManagedFeedImage })
+                            .map({ LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, imageUrl: $0.url) })
+                        ,timestamp: cache.timestamp))
+                }
+                else {
+                    completion(.empty)
+                }
+            }
+            catch {
+                completion(.failure(error))
+            }
+            
+        }
     }
     
     func deleteCache(completion: @escaping Completion) {
@@ -27,7 +47,27 @@ final class CoreDataFeedStore: FeedStore {
     }
     
     func insertCache(with items: [LocalFeedImage], timestamp: Date, completion: @escaping Completion) {
-        
+        let context = self.context
+        context.perform {
+            do {
+                let cache = ManagedCache(context: context)
+                cache.timestamp = timestamp
+                cache.feed = NSOrderedSet(array: items.map({ item in
+                    let managedFeedImage = ManagedFeedImage(context: context)
+                    managedFeedImage.id = item.id
+                    managedFeedImage.location = item.location
+                    managedFeedImage.imageDescription = item.description
+                    managedFeedImage.url = item.url
+                    return managedFeedImage
+                }))
+                
+                try context.save()
+                completion(nil)
+            }
+            catch {
+                completion(error)
+            }
+        }
     }
     
 }

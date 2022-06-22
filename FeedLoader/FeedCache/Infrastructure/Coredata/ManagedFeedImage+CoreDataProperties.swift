@@ -16,8 +16,8 @@ extension ManagedFeedImage {
         return NSFetchRequest<ManagedFeedImage>(entityName: "ManagedFeedImage")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var url: URL?
+    @NSManaged public var id: UUID
+    @NSManaged public var url: URL
     @NSManaged public var location: String?
     @NSManaged public var imageDescription: String?
     @NSManaged public var cache: ManagedCache?
