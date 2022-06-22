@@ -20,3 +20,5 @@ struct LocalFeedImage: Equatable {
         self.url = imageUrl
     }
 }
+
+
