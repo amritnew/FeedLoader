@@ -17,6 +17,11 @@ extension ManagedCache {
         request.returnsObjectsAsFaults = false
         return try context.fetch(request).first
     }
+    
+    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
+        try ManagedCache.fetchRequest(context: context).map{context.delete($0)}
+        return ManagedCache(context: context)
+    }
 
     @NSManaged public var timestamp: Date
     @NSManaged public var feed: NSOrderedSet
