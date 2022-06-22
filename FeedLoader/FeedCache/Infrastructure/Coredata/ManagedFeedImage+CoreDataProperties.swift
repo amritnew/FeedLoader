@@ -22,6 +22,20 @@ extension ManagedFeedImage {
     @NSManaged public var imageDescription: String?
     @NSManaged public var cache: ManagedCache?
 
+    var local: LocalFeedImage {
+        return LocalFeedImage(id: id, description: imageDescription, location: location, imageUrl: url)
+    }
+    
+    static func managedFeedImages(localFeeds: [LocalFeedImage], in context: NSManagedObjectContext) -> NSOrderedSet {
+        return NSOrderedSet(array: localFeeds.map { local in
+            let managedFeedImage = ManagedFeedImage(context: context)
+            managedFeedImage.id = local.id
+            managedFeedImage.location = local.location
+            managedFeedImage.imageDescription = local.description
+            managedFeedImage.url = local.url
+            return managedFeedImage
+        })
+    }
 }
 
 extension ManagedFeedImage : Identifiable {
