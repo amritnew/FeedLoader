@@ -38,7 +38,7 @@ final class CoreDataFeedStore: FeedStore {
     }
     
     func deleteCache(completion: @escaping Completion) {
-        
+        completion(nil)
     }
     
     func insertCache(with items: [LocalFeedImage], timestamp: Date, completion: @escaping Completion) {
@@ -91,5 +91,4 @@ extension NSManagedObjectModel {
             .flatMap{ NSManagedObjectModel(contentsOf: $0) }
     }
 }
-
 
