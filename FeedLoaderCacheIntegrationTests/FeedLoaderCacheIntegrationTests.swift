@@ -39,6 +39,30 @@ class FeedLoaderCacheIntegrationTests: XCTestCase {
         expect(sut: sutToPerformLoad, toLoad: feed)
     }
     
+    func test_save_overrideItemsSavedOnSeperateInstance() {
+        let sutToPerformFirstSave = makeSUT()
+        let sutToPerformLastSave = makeSUT()
+        let sutToPerformLoad = makeSUT()
+        let firstFeed = uniqueImageFeed().models
+        let latestFeed = uniqueImageFeed().models
+        
+        let saveExp1 = expectation(description: "Wait for save completion")
+        sutToPerformFirstSave.save(firstFeed) { saveError in
+            XCTAssertNil(saveError, "Expected to save feed succesfull")
+            saveExp1.fulfill()
+        }
+        wait(for: [saveExp1], timeout: 1.0)
+        
+        let saveExp2 = expectation(description: "Wait for save completion")
+        sutToPerformLastSave.save(latestFeed) { saveError in
+            XCTAssertNil(saveError, "Expected to save feed succesfull")
+            saveExp2.fulfill()
+        }
+        wait(for: [saveExp2], timeout: 1.0)
+        
+        expect(sut: sutToPerformLoad, toLoad: latestFeed)
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalFeedLoader {
