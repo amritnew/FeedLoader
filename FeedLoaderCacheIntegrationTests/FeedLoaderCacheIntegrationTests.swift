@@ -10,6 +10,14 @@ import XCTest
 
 class FeedLoaderCacheIntegrationTests: XCTestCase {
 
+    override func setUp() {
+        setUpEmptyStoreState()
+    }
+    
+    override func tearDown() {
+        undoStoreState()
+    }
+    
     func test_load_deliverNoItemOnEmptyCache() {
         let sut = makeSUT()
         
@@ -26,6 +34,34 @@ class FeedLoaderCacheIntegrationTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_load_deliverItemsSavedOnSeperateInstances() {
+        let sutToPerformSave = makeSUT()
+        let sutToPerformLoad = makeSUT()
+        let feed = uniqueImageFeed().models
+        
+        let saveExp = expectation(description: "Wait for save completion")
+        sutToPerformSave.save(feed) { saveError in
+            XCTAssertNil(saveError, "Expected to save feed succesfull")
+            saveExp.fulfill()
+        }
+        wait(for: [saveExp], timeout: 1.0)
+        
+        let loadExp = expectation(description: "Wait for load expectation")
+        sutToPerformLoad.load { result in
+            switch result {
+            case let .success(imageFeed):
+                XCTAssertEqual(imageFeed, feed)
+            case let .failure(error):
+                XCTFail("Expected sucessfull feed result, got \(error) instead")
+            }
+            
+            loadExp.fulfill()
+        }
+        
+        wait(for: [loadExp], timeout: 1.0)
+        
     }
     
     // MARK: Helpers
@@ -46,6 +82,18 @@ class FeedLoaderCacheIntegrationTests: XCTestCase {
     
     private func cacheDirectory() -> URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    }
+    
+    private func setUpEmptyStoreState() {
+        deleteStoreArtifacts()
+    }
+    
+    private func undoStoreState() {
+        deleteStoreArtifacts()
+    }
+    
+    private func deleteStoreArtifacts() {
+        try? FileManager.default.removeItem(at: testSpecificStoreURL())
     }
 
 }
