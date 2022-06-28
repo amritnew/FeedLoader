@@ -20,6 +20,7 @@
 		6552AA7A28609E5800C791A2 /* XCTestCase+FailableInsertFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6552AA7928609E5800C791A2 /* XCTestCase+FailableInsertFeedStoreSpecs.swift */; };
 		6552AA7C28609E9300C791A2 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6552AA7B28609E9300C791A2 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */; };
 		6561434F2852196600053A00 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6561434E2852196600053A00 /* SharedTestHelpers.swift */; };
+		65641222286B135D00475129 /* FeedLoaderCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65641221286B135D00475129 /* FeedLoaderCacheIntegrationTests.swift */; };
 		657562332809489E006C49FA /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657562322809489D006C49FA /* FeedLoader.swift */; };
 		65756237280D7676006C49FA /* RemoteFeedLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65756236280D7675006C49FA /* RemoteFeedLoaderTests.swift */; };
 		6575623B280D7D3A006C49FA /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6575623A280D7D3A006C49FA /* HttpClient.swift */; };
@@ -57,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		65641223286B135D00475129 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65E768842806ABAB00F0AF24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65E7688B2806ABAB00F0AF24;
+			remoteInfo = FeedLoader;
+		};
 		65795962283252070077B400 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65E768842806ABAB00F0AF24 /* Project object */;
@@ -94,6 +102,8 @@
 		6552AA7928609E5800C791A2 /* XCTestCase+FailableInsertFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertFeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		6552AA7B28609E9300C791A2 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveFeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		6561434E2852196600053A00 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		6564121F286B135D00475129 /* FeedLoaderCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedLoaderCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65641221286B135D00475129 /* FeedLoaderCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		657562322809489D006C49FA /* FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoader.swift; sourceTree = "<group>"; };
 		65756236280D7675006C49FA /* RemoteFeedLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoaderTests.swift; sourceTree = "<group>"; };
 		6575623A280D7D3A006C49FA /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
@@ -135,6 +145,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6564121C286B135D00475129 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6579595B283252060077B400 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,6 +239,14 @@
 			path = FeedStoreSpecs;
 			sourceTree = "<group>";
 		};
+		65641220286B135D00475129 /* FeedLoaderCacheIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				65641221286B135D00475129 /* FeedLoaderCacheIntegrationTests.swift */,
+			);
+			path = FeedLoaderCacheIntegrationTests;
+			sourceTree = "<group>";
+		};
 		65756235280948C9006C49FA /* FeedFeature */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +323,7 @@
 				65E768A52806ABB100F0AF24 /* FeedLoaderTests */,
 				65E768AF2806ABB100F0AF24 /* FeedLoaderUITests */,
 				6579595F283252070077B400 /* FeedLoaderAPIEndToEndTest */,
+				65641220286B135D00475129 /* FeedLoaderCacheIntegrationTests */,
 				65E7688D2806ABAB00F0AF24 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -309,6 +335,7 @@
 				65E768A22806ABB100F0AF24 /* FeedLoaderTests.xctest */,
 				65E768AC2806ABB100F0AF24 /* FeedLoaderUITests.xctest */,
 				6579595E283252070077B400 /* FeedLoaderAPIEndToEndTest.xctest */,
+				6564121F286B135D00475129 /* FeedLoaderCacheIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -354,6 +381,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6564121E286B135D00475129 /* FeedLoaderCacheIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65641227286B135E00475129 /* Build configuration list for PBXNativeTarget "FeedLoaderCacheIntegrationTests" */;
+			buildPhases = (
+				6564121B286B135D00475129 /* Sources */,
+				6564121C286B135D00475129 /* Frameworks */,
+				6564121D286B135D00475129 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65641224286B135D00475129 /* PBXTargetDependency */,
+			);
+			name = FeedLoaderCacheIntegrationTests;
+			productName = FeedLoaderCacheIntegrationTests;
+			productReference = 6564121F286B135D00475129 /* FeedLoaderCacheIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6579595D283252060077B400 /* FeedLoaderAPIEndToEndTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65795964283252070077B400 /* Build configuration list for PBXNativeTarget "FeedLoaderAPIEndToEndTest" */;
@@ -432,9 +477,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					6564121E286B135D00475129 = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 65E7688B2806ABAB00F0AF24;
+					};
 					6579595D283252060077B400 = {
 						CreatedOnToolsVersion = 13.2.1;
 						TestTargetID = 65E7688B2806ABAB00F0AF24;
@@ -469,11 +518,19 @@
 				65E768A12806ABB100F0AF24 /* FeedLoaderTests */,
 				65E768AB2806ABB100F0AF24 /* FeedLoaderUITests */,
 				6579595D283252060077B400 /* FeedLoaderAPIEndToEndTest */,
+				6564121E286B135D00475129 /* FeedLoaderCacheIntegrationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6564121D286B135D00475129 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6579595C283252060077B400 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -508,6 +565,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6564121B286B135D00475129 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65641222286B135D00475129 /* FeedLoaderCacheIntegrationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6579595A283252060077B400 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -583,6 +648,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		65641224286B135D00475129 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65E7688B2806ABAB00F0AF24 /* FeedLoader */;
+			targetProxy = 65641223286B135D00475129 /* PBXContainerItemProxy */;
+		};
 		65795963283252070077B400 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65E7688B2806ABAB00F0AF24 /* FeedLoader */;
@@ -620,6 +690,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		65641225286B135D00475129 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G5F599DRJV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Amrit.FeedLoaderCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FeedLoader.app/FeedLoader";
+			};
+			name = Debug;
+		};
+		65641226286B135D00475129 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G5F599DRJV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Amrit.FeedLoaderCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FeedLoader.app/FeedLoader";
+			};
+			name = Release;
+		};
 		65795965283252070077B400 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -907,6 +1015,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65641227286B135E00475129 /* Build configuration list for PBXNativeTarget "FeedLoaderCacheIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65641225286B135D00475129 /* Debug */,
+				65641226286B135D00475129 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65795964283252070077B400 /* Build configuration list for PBXNativeTarget "FeedLoaderAPIEndToEndTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

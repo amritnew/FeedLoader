@@ -70,6 +70,16 @@
                ReferencedContainer = "container:FeedLoader.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6564121E286B135D00475129"
+               BuildableName = "FeedLoaderCacheIntegrationTests.xctest"
+               BlueprintName = "FeedLoaderCacheIntegrationTests"
+               ReferencedContainer = "container:FeedLoader.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
