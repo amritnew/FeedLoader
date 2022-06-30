@@ -64,9 +64,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6579594F28322EC80077B400"
-               BuildableName = "FeedLoaderAPIEndToEndTests.xctest"
-               BlueprintName = "FeedLoaderAPIEndToEndTests"
+               BlueprintIdentifier = "6579595D283252060077B400"
+               BuildableName = "FeedLoaderAPIEndToEndTest.xctest"
+               BlueprintName = "FeedLoaderAPIEndToEndTest"
                ReferencedContainer = "container:FeedLoader.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -74,9 +74,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6579595D283252060077B400"
-               BuildableName = "FeedLoaderAPIEndToEndTest.xctest"
-               BlueprintName = "FeedLoaderAPIEndToEndTest"
+               BlueprintIdentifier = "6564121E286B135D00475129"
+               BuildableName = "FeedLoaderCacheIntegrationTests.xctest"
+               BlueprintName = "FeedLoaderCacheIntegrationTests"
                ReferencedContainer = "container:FeedLoader.xcodeproj">
             </BuildableReference>
          </TestableReference>
