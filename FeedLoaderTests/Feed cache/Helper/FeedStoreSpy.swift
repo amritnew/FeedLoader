@@ -9,7 +9,7 @@ import Foundation
 @testable import FeedLoader
 
 class FeedStoreSpy: FeedStore {
-    typealias Completion = (Error?) -> Void
+    typealias Completion = (FeedStore.CompletionResult) -> Void
     typealias RetrievalCompletion = (FeedStore.RetrievalResult) -> Void
     
     enum RecievedMessage: Equatable {
@@ -34,19 +34,19 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeInsertionError(_ error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
+        insertionCompletions[index](.failure(error))
     }
     
     func completeInsertionSucessFully(at index: Int = 0) {
-        insertionCompletions[index](nil)
+        insertionCompletions[index](.success(()))
     }
     
     func completeDeletionError(_ error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
+        deletionCompletions[index](.failure(error))
     }
     
     func completeDeletionSucessFully(at index: Int = 0) {
-        deletionCompletions[index](nil)
+        deletionCompletions[index](.success(()))
     }
     
     func retrieve(completion: @escaping RetrievalCompletion) {
