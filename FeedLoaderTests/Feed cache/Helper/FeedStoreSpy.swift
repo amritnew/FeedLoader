@@ -10,7 +10,7 @@ import Foundation
 
 class FeedStoreSpy: FeedStore {
     typealias Completion = (Error?) -> Void
-    typealias RetrievalCompletion = (RetrievalCachedFeedResult) -> Void
+    typealias RetrievalCompletion = (FeedStore.RetrievalResult) -> Void
     
     enum RecievedMessage: Equatable {
         case retrieve
@@ -59,10 +59,10 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompletions[index](.empty)
+        retrievalCompletions[index](.success(.empty))
     }
     
     func completeRetrievalWith(imageCache: [LocalFeedImage], timestamp: Date, at index: Int = 0) {
-        retrievalCompletions[index](.found(feed: imageCache, timestamp: timestamp))
+        retrievalCompletions[index](.success(.found(feed: imageCache, timestamp: timestamp)))
     }
 }
