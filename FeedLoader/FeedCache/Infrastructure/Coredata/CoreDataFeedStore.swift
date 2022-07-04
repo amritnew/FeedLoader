@@ -22,11 +22,10 @@ final class CoreDataFeedStore: FeedStore {
         perform { context in
             do {
                 if let cache = try ManagedCache.fetchRequest(context: context) {
-                    completion(.success(.found(
-                        feed: cache.localFeeds ,timestamp: cache.timestamp)))
+                    completion(.success(CacheFeed(feed: cache.localFeeds, timestamp: cache.timestamp)))
                 }
                 else {
-                    completion(.success(.empty))
+                    completion(.success(.none))
                 }
             }
             catch {
