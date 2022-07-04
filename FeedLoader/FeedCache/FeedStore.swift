@@ -12,7 +12,8 @@ typealias CacheFeed  = (feed: [LocalFeedImage], timestamp: Date)
 protocol FeedStore {
     typealias RetrievalResult = Result<CacheFeed?, Error>
     
-    typealias Completion = (Error?) -> Void
+    typealias CompletionError = Error?
+    typealias Completion = (CompletionError) -> Void
     typealias RetrievalCompletion = (RetrievalResult) -> Void
     
     /// The Completion Handler can be invoked in any thread
