@@ -17,13 +17,13 @@ class URLSessionHttpClient: HTTPClient {
         self.session = urlSession
     }
     
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
         session.dataTask(with: url) { data, response, error in
             if let err = error {
                 completion(.failure(err))
             }
             else if let data = data, let response = response as? HTTPURLResponse {
-                completion(.success(data, response ))
+                completion(.success((data, response) ))
             }
             else {
                 completion(.failure(InvalidRepresentation()))
