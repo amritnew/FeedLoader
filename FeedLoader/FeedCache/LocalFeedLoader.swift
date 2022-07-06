@@ -20,18 +20,18 @@ final class LocalFeedLoader {
 }
  
 extension LocalFeedLoader: FeedLoader {
-    typealias LoadResult = LoadFeedResult
+    typealias LoadResult = FeedLoader.Result
     
     func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case let .found(feeds, timestamp) where FeedCachePolicy.validate(timestamp, against: self.currentDate()):
-                completion(.success(feeds.toModels()))
+            case let .success(.some(cache)) where FeedCachePolicy.validate(cache.timestamp, against: self.currentDate()):
+                completion(.success(cache.feed.toModels()))
                 
             case let .failure(error):
                 completion(.failure(error))
-            case .empty, .found:
+            case .success:
                 completion(.success([]))
             }
         }
@@ -45,9 +45,9 @@ extension LocalFeedLoader {
             switch result {
             case .failure:
                 self.store.deleteCache {_ in }
-            case let .found(_, timestamp) where !FeedCachePolicy.validate(timestamp, against: self.currentDate()):
+            case let .success(.some(cache)) where !FeedCachePolicy.validate(cache.timestamp, against: self.currentDate()):
                 self.store.deleteCache {_ in }
-            case .empty, .found:
+            case .success:
                 break
             }
         }
@@ -56,17 +56,18 @@ extension LocalFeedLoader {
 }
 
 extension LocalFeedLoader {
-    public typealias SaveResult = Error?
+    public typealias SaveResult = Result<Void, Error>
     
     func save(_ items: [FeedImage], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCache { [weak self] error in
+        store.deleteCache { [weak self] deletionResult in
             guard let self = self else { return }
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            }
-            else {
+            switch deletionResult {
+            case .success:
                 self.cacheItem(items, with: completion)
+            case let .failure(error):
+                completion(.failure(error))
             }
+            
         }
     }
     

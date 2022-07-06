@@ -9,8 +9,8 @@ import Foundation
 @testable import FeedLoader
 
 class FeedStoreSpy: FeedStore {
-    typealias Completion = (Error?) -> Void
-    typealias RetrievalCompletion = (RetrievalCachedFeedResult) -> Void
+    typealias Completion = (FeedStore.CompletionResult) -> Void
+    typealias RetrievalCompletion = (FeedStore.RetrievalResult) -> Void
     
     enum RecievedMessage: Equatable {
         case retrieve
@@ -34,19 +34,19 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeInsertionError(_ error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
+        insertionCompletions[index](.failure(error))
     }
     
     func completeInsertionSucessFully(at index: Int = 0) {
-        insertionCompletions[index](nil)
+        insertionCompletions[index](.success(()))
     }
     
     func completeDeletionError(_ error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
+        deletionCompletions[index](.failure(error))
     }
     
     func completeDeletionSucessFully(at index: Int = 0) {
-        deletionCompletions[index](nil)
+        deletionCompletions[index](.success(()))
     }
     
     func retrieve(completion: @escaping RetrievalCompletion) {
@@ -59,10 +59,10 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompletions[index](.empty)
+        retrievalCompletions[index](.success(.none))
     }
     
     func completeRetrievalWith(imageCache: [LocalFeedImage], timestamp: Date, at index: Int = 0) {
-        retrievalCompletions[index](.found(feed: imageCache, timestamp: timestamp))
+        retrievalCompletions[index](.success(CacheFeed(feed: imageCache, timestamp: timestamp)))
     }
 }

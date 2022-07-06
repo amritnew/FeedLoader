@@ -7,15 +7,14 @@
 
 import Foundation
 
-enum RetrievalCachedFeedResult {
-    case empty
-    case found(feed: [LocalFeedImage], timestamp: Date)
-    case failure(Error)
-}
+typealias CacheFeed  = (feed: [LocalFeedImage], timestamp: Date)
 
 protocol FeedStore {
-    typealias Completion = (Error?) -> Void
-    typealias RetrievalCompletion = (RetrievalCachedFeedResult) -> Void
+    typealias RetrievalResult = Result<CacheFeed?, Error>
+    
+    typealias CompletionResult = Result<Void, Error>
+    typealias Completion = (CompletionResult) -> Void
+    typealias RetrievalCompletion = (RetrievalResult) -> Void
     
     /// The Completion Handler can be invoked in any thread
     /// Client are responsible to dispatchto appropriate thread. if needed

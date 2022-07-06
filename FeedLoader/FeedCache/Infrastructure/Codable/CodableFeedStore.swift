@@ -48,12 +48,12 @@ class CodableFeedStore: FeedStore {
         queue.async {
             let decoder = JSONDecoder()
             guard let data = try? Data(contentsOf: storeUrl) else {
-                return completion(.empty)
+                return completion(.success(.none))
             }
             
             do {
                 let cache = try decoder.decode(Cache.self, from: data)
-                completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
+                completion(.success(CacheFeed(feed: cache.localFeed, timestamp: cache.timestamp)))
             } catch {
                 completion(.failure(error))
             }
@@ -64,32 +64,23 @@ class CodableFeedStore: FeedStore {
         let storeUrl = storeUrl
         queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: storeUrl.path) else {
-                return completion(nil)
+                return completion(.success(()))
             }
-            do {
+            completion( Result {
                 try FileManager.default.removeItem(at: storeUrl)
-                completion(nil)
-            }
-            catch {
-                completion(error)
-            }
-                
+            })
         }
     }
     
     func insertCache(with items: [LocalFeedImage], timestamp: Date, completion: @escaping Completion) {
         let storeUrl = storeUrl
         queue.async(flags: .barrier) {
-            do {
+            completion( Result {
                 let encoder = JSONEncoder()
                 let cache = Cache(feed: items.map(CodableFeedImage.init), timestamp: timestamp)
                 let encoded = try encoder.encode(cache)
                 try encoded.write(to: storeUrl)
-                completion(nil)
-            }
-            catch {
-                completion(error)
-            }
+            })
         }
         
     }
