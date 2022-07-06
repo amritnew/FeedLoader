@@ -8,17 +8,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--My Feed-->
         <scene sceneID="P5B-Xk-NcO">
             <objects>
-                <tableViewController id="iFO-CJ-uoS" sceneMemberID="viewController">
+                <tableViewController id="iFO-CJ-uoS" customClass="FeedViewController" customModule="Prototype" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vmi-Aa-k6s">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="G62-G7-uI8">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="5zl-nA-8ee">
+                            <rect key="frame" x="0.0" y="683" width="414" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedImageCell" rowHeight="600" id="Exj-P8-zDJ">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="600"/>
+                                <rect key="frame" x="0.0" y="60.5" width="414" height="600"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Exj-P8-zDJ" id="OI4-u9-WQF">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
@@ -100,7 +110,7 @@ Description</string>
                             <outlet property="delegate" destination="iFO-CJ-uoS" id="0Z4-RE-fMM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="GNn-HH-GNu"/>
+                    <navigationItem key="navigationItem" title="My Feed" id="GNn-HH-GNu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAl-s8-RgN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
