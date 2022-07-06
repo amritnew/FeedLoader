@@ -14,6 +14,7 @@
 		654C52EF28757F770083AC88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654C52ED28757F770083AC88 /* LaunchScreen.storyboard */; };
 		654C52F72875A2630083AC88 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654C52F62875A2630083AC88 /* FeedViewController.swift */; };
 		654C52F92875A43A0083AC88 /* FeeImageViewModel+PrototypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654C52F82875A43A0083AC88 /* FeeImageViewModel+PrototypeData.swift */; };
+		654C52FB2875A5A80083AC88 /* FeedImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654C52FA2875A5A80083AC88 /* FeedImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		654C52F028757F770083AC88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		654C52F62875A2630083AC88 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		654C52F82875A43A0083AC88 /* FeeImageViewModel+PrototypeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeeImageViewModel+PrototypeData.swift"; sourceTree = "<group>"; };
+		654C52FA2875A5A80083AC88 /* FeedImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +63,12 @@
 				654C52E228757F740083AC88 /* AppDelegate.swift */,
 				654C52E428757F740083AC88 /* SceneDelegate.swift */,
 				654C52F62875A2630083AC88 /* FeedViewController.swift */,
+				654C52F82875A43A0083AC88 /* FeeImageViewModel+PrototypeData.swift */,
+				654C52FA2875A5A80083AC88 /* FeedImageCell.swift */,
 				654C52E828757F740083AC88 /* Main.storyboard */,
 				654C52EB28757F770083AC88 /* Assets.xcassets */,
 				654C52ED28757F770083AC88 /* LaunchScreen.storyboard */,
 				654C52F028757F770083AC88 /* Info.plist */,
-				654C52F82875A43A0083AC88 /* FeeImageViewModel+PrototypeData.swift */,
 			);
 			path = Prototype;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				654C52F72875A2630083AC88 /* FeedViewController.swift in Sources */,
 				654C52F92875A43A0083AC88 /* FeeImageViewModel+PrototypeData.swift in Sources */,
 				654C52E528757F740083AC88 /* SceneDelegate.swift in Sources */,
+				654C52FB2875A5A80083AC88 /* FeedImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
