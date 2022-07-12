@@ -42,7 +42,7 @@ jobs:
       - name: Build and test CI_macosx
         run: xcodebuild clean build test
                 -project EssentialFeed/EssentialFeed.xcodeproj
-                -scheme "CI_macosx"
+                -scheme "CI_macOS"
                 -sdk macosx
                 -destination 'platform=macOS'
                 CODE_SIGNING_IDENTITY=""
