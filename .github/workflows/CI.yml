@@ -32,14 +32,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build and test
         run: xcodebuild clean build test
-                -project FeedLoader.xcodeproj
+                -project EssentialFeed/EssentialFeed.xcodeproj
                 -scheme "CI_iOS"
                 -sdk iphonesimulator
                 -destination 'platform=iOS Simulator,name=iPhone 12'
                 CODE_SIGNING_IDENTITY=""
                 CODE_SIGNING_REQUIRED=NO
             xcodebuild clean build test
-                -project FeedLoader.xcodeproj
+                -project EssentialFeed/EssentialFeed.xcodeproj
                 -scheme "CI_macosx"
                 -sdk macosx
                 -destination 'platform=macOS'
