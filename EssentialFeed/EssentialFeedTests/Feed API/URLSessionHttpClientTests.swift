@@ -37,11 +37,12 @@ class URLSessionHttpClientTests: XCTestCase {
     }
     
     func test_getFromURL_failOnRequestError() {
-        let requestError = NSError(domain: "Any error", code: 1)
-        if let recievedError = resultErrorFor(error: requestError) as NSError? {
-            XCTAssertEqual(recievedError.domain, requestError.domain)
-            XCTAssertEqual(recievedError.code, requestError.code)
-        }
+        let requestError = anyError()
+        
+        let receivedError = resultErrorFor(data: nil, response: nil, error: requestError)
+        
+        XCTAssertEqual((receivedError as NSError?)?.domain, requestError.domain)
+        XCTAssertEqual((receivedError as NSError?)?.code, requestError.code)
     }
 
     func test_getFromURL_failOnAllNilvalues() {
