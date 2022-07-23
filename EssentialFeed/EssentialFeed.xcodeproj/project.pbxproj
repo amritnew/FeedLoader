@@ -70,6 +70,7 @@
 		6566F3D82889BF3900493075 /* FeedImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6566F3D72889BF3900493075 /* FeedImagePresenter.swift */; };
 		6580CCF6288C12A80029DDC5 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6580CCF5288C12A80029DDC5 /* Feed.storyboard */; };
 		65A604CC288C25150031143D /* UITableView+dequeuing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A604CB288C25150031143D /* UITableView+dequeuing.swift */; };
+		65A604D0288C27130031143D /* UIImageView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A604CF288C27130031143D /* UIImageView+Animation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		6566F3D72889BF3900493075 /* FeedImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImagePresenter.swift; sourceTree = "<group>"; };
 		6580CCF5288C12A80029DDC5 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		65A604CB288C25150031143D /* UITableView+dequeuing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeuing.swift"; sourceTree = "<group>"; };
+		65A604CF288C27130031143D /* UIImageView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,6 +478,7 @@
 				652761D2287EECE500BB18D2 /* UIView+Shimmering.swift */,
 				6580CCF5288C12A80029DDC5 /* Feed.storyboard */,
 				65A604CB288C25150031143D /* UITableView+dequeuing.swift */,
+				65A604CF288C27130031143D /* UIImageView+Animation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 				65A604CC288C25150031143D /* UITableView+dequeuing.swift in Sources */,
 				6566F3D82889BF3900493075 /* FeedImagePresenter.swift in Sources */,
 				6566F3CA2886B62700493075 /* FeedUIComposer.swift in Sources */,
+				65A604D0288C27130031143D /* UIImageView+Animation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
