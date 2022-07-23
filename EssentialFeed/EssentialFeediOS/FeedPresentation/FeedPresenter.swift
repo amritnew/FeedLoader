@@ -7,21 +7,6 @@
 
 import EssentialFeed
 
-
-struct FeedLoadingViewModel {
-    let isLoading: Bool
-}
-protocol FeedLoadingView {
-    func display(viewModel: FeedLoadingViewModel)
-}
-
-struct FeedViewModel {
-    let feeds: [FeedImage]
-}
-protocol FeedView {
-    func display(viewModel: FeedViewModel)
-}
-
 final class FeedPresenter {
     private let view: FeedView
     private let loadingView: FeedLoadingView
