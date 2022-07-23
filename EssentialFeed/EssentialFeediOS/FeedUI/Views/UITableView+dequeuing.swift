@@ -12,4 +12,4 @@ extension UITableView {
         let identifier = String(describing: T.self)
         return dequeueReusableCell(withIdentifier: identifier) as! T
     }
-}
+} 
