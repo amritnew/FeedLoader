@@ -81,6 +81,9 @@ Label</string>
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="60" scale="large" weight="heavy"/>
                                                                 <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="retryButtonTap" destination="1Ws-R2-rxK" eventType="touchUpInside" id="I8O-jd-ETt"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,11 +131,12 @@ Description</string>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="descriptionLabel" destination="EwY-8J-ZKT" id="0nV-Zp-Fnu"/>
-                                    <outlet property="feedImageContainer" destination="Tc3-Ek-P9K" id="BTW-89-ziK"/>
-                                    <outlet property="feedImageView" destination="HVY-LU-6vU" id="VIH-gE-mPE"/>
-                                    <outlet property="locationContainer" destination="Qib-Km-k0D" id="tKL-wb-i2i"/>
-                                    <outlet property="locationLabel" destination="4Ws-Lh-t0x" id="ubg-zD-fek"/>
+                                    <outlet property="descriptionLabel" destination="EwY-8J-ZKT" id="T74-rC-cT2"/>
+                                    <outlet property="feedImageContainer" destination="Tc3-Ek-P9K" id="iYO-eB-poA"/>
+                                    <outlet property="feedImageRetryButton" destination="dt7-ZJ-VWi" id="iFb-cV-1t3"/>
+                                    <outlet property="feedImageView" destination="HVY-LU-6vU" id="Flw-6E-Dks"/>
+                                    <outlet property="locationContainer" destination="Qib-Km-k0D" id="nNZ-wR-Qv8"/>
+                                    <outlet property="locationLabel" destination="4Ws-Lh-t0x" id="d0h-Pb-80h"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
